@@ -6,6 +6,8 @@ import Checkout from './pages/Checkout'
 import ProductDetail from './pages/ProductDetail'
 import AdminProducts from './pages/admin/AdminProducts'
 import AdminOrders from './pages/admin/AdminOrders'
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/admin/products" element={<AdminProducts />} />
       <Route path="/admin/orders" element={<AdminOrders />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   )
 }
