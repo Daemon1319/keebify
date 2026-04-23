@@ -39,9 +39,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => {
       const existing = prev.find((item) => item.product_id === product.id)
       if (existing) {
+        const nextQty = Math.min(existing.quantity + quantity, product.stock)
         return prev.map((item) =>
           item.product_id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: nextQty, stock: product.stock }
             : item
         )
       }
@@ -52,7 +53,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           name: product.name,
           price: product.price,
           image_url: product.image_url,
-          quantity,
+          quantity: Math.min(quantity, product.stock),
+          stock: product.stock,
         },
       ]
     })
@@ -65,7 +67,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
     setItems((prev) =>
       prev.map((item) =>
-        item.product_id === productId ? { ...item, quantity } : item
+        item.product_id === productId
+          ? { ...item, quantity: Math.min(quantity, item.stock) }
+          : item
       )
     )
   }
