@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router'
 import Layout from './components/Layout'
+import AdminRoute from './components/AdminRoute'
 import Home from './pages/Home'
 import Products from './pages/Products'
 import Cart from './pages/Cart'
@@ -19,8 +20,11 @@ function App() {
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/admin/products" element={<AdminProducts />} />
-        <Route path="/admin/orders" element={<AdminOrders />} />
+
+        <Route element={<AdminRoute />}>
+          <Route path="/admin/products" element={<AdminProducts />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
+        </Route>
       </Route>
 
       <Route path="/login" element={<Login />} />
