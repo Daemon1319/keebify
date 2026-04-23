@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
 import { getFeaturedProducts, getCategories } from '../lib/products'
 import type { Product, Category } from '../types/product'
@@ -30,9 +29,7 @@ function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen">
-      <Navbar />
-
+    <>
       {/* Hero */}
       <section className="flex flex-col items-center justify-center text-center px-8 py-24">
         <h1 className="text-5xl font-bold text-zinc-900 mb-4">
@@ -83,14 +80,7 @@ function Home() {
           </div>
         )}
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-zinc-100 px-8 py-6 mt-12">
-        <p className="text-zinc-400 text-sm text-center">
-          © {new Date().getFullYear()} Keebify. All rights reserved.
-        </p>
-      </footer>
-    </div>
+    </>
   )
 }
 
