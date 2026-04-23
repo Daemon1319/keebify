@@ -17,18 +17,20 @@
 - created_at (timestamptz)
 - updated_at (timestamptz)
 
-### users
-- id (uuid, PK)
-- email (text)
-- role (text)
+### profiles
+- id (uuid, PK, FK → auth.users)
+- role (text, default 'customer')
 - created_at (timestamptz)
 - updated_at (timestamptz)
 
 ### orders
 - id (uuid, PK)
-- user_id (uuid, FK → users)
+- user_id (uuid, FK → profiles, nullable)
+- email (text, nullable)
 - total (numeric)
 - status (text)
+- shipping_address (jsonb, nullable)
+- stripe_payment_intent_id (text, nullable)
 - created_at (timestamptz)
 - updated_at (timestamptz)
 
@@ -36,6 +38,8 @@
 - id (uuid, PK)
 - order_id (uuid, FK → orders)
 - product_id (uuid, FK → products)
+- product_name (text)
+- product_image_url (text, nullable)
 - quantity (int4)
 - price (numeric)
 - created_at (timestamptz)
