@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 
 function Register() {
   const [email, setEmail] = useState('')
@@ -60,7 +60,7 @@ function Register() {
 
         <p className="text-zinc-500 mt-4">
           Already have an account?{' '}
-          <a href="/login" className="text-zinc-900 underline">Login</a>
+          <Link to="/login" className="text-zinc-900 underline">Login</Link>
         </p>
       </div>
     </div>
