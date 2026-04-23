@@ -8,6 +8,7 @@ import Checkout from './pages/Checkout'
 import ProductDetail from './pages/ProductDetail'
 import AdminProducts from './pages/admin/AdminProducts'
 import AdminOrders from './pages/admin/AdminOrders'
+import AdminOrderDetail from './pages/admin/AdminOrderDetail'
 import Login from './pages/Login'
 import Register from './pages/Register'
 
@@ -24,6 +25,7 @@ function App() {
         <Route element={<AdminRoute />}>
           <Route path="/admin/products" element={<AdminProducts />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
+          <Route path="/admin/orders/:id" element={<AdminOrderDetail />} />
         </Route>
       </Route>
 
