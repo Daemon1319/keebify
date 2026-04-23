@@ -1,10 +1,12 @@
 import { Link } from 'react-router'
 import { useAuth } from '../context/AuthContext'
+import { useCart } from '../context/CartContext'
 import { supabase } from '../lib/supabase'
 import { useNavigate } from 'react-router'
 
 function Navbar() {
   const { user } = useAuth()
+  const { totalItems } = useCart()
   const navigate = useNavigate()
 
   async function handleLogout() {
@@ -23,7 +25,7 @@ function Navbar() {
           Products
         </Link>
         <Link to="/cart" className="text-zinc-600 hover:text-zinc-900">
-          Cart
+          Cart {totalItems > 0 && <span className="text-zinc-900">({totalItems})</span>}
         </Link>
         {user ? (
           <button

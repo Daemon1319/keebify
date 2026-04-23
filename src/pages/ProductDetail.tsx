@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { getProductById } from '../lib/products'
+import { useCart } from '../context/CartContext'
 import type { Product } from '../types/product'
 
 function ProductDetail() {
   const { id } = useParams<{ id: string }>()
+  const { addItem } = useCart()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [added, setAdded] = useState(false)
 
   useEffect(() => {
     if (!id) return
@@ -89,9 +92,14 @@ function ProductDetail() {
 
           <button
             disabled={outOfStock}
+            onClick={() => {
+              addItem(product)
+              setAdded(true)
+              setTimeout(() => setAdded(false), 1500)
+            }}
             className="px-6 py-3 bg-zinc-900 text-white font-bold rounded hover:bg-zinc-700 disabled:bg-zinc-300 disabled:cursor-not-allowed"
           >
-            {outOfStock ? 'Out of stock' : 'Add to cart'}
+            {outOfStock ? 'Out of stock' : added ? 'Added!' : 'Add to cart'}
           </button>
         </div>
       </div>
