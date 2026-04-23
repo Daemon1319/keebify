@@ -16,3 +16,10 @@ export interface Category {
   created_at: string
   updated_at: string
 }
+
+export interface Profile {
+  id: string
+  role: 'customer' | 'admin'
+  created_at: string
+  updated_at: string
+}
