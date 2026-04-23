@@ -4,4 +4,5 @@ export interface CartItem {
   price: number
   image_url: string | null
   quantity: number
+  stock: number
 }

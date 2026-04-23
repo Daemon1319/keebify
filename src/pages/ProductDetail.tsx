@@ -6,7 +6,7 @@ import type { Product } from '../types/product'
 
 function ProductDetail() {
   const { id } = useParams<{ id: string }>()
-  const { addItem } = useCart()
+  const { addItem, items } = useCart()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -58,6 +58,9 @@ function ProductDetail() {
   }
 
   const outOfStock = product.stock <= 0
+  const inCart = items.find((i) => i.product_id === product.id)?.quantity ?? 0
+  const atMax = inCart >= product.stock
+  const disabled = outOfStock || atMax
 
   return (
     <div className="px-8 py-12">
@@ -91,7 +94,7 @@ function ProductDetail() {
           </p>
 
           <button
-            disabled={outOfStock}
+            disabled={disabled}
             onClick={() => {
               addItem(product)
               setAdded(true)
@@ -99,7 +102,13 @@ function ProductDetail() {
             }}
             className="px-6 py-3 bg-zinc-900 text-white font-bold rounded hover:bg-zinc-700 disabled:bg-zinc-300 disabled:cursor-not-allowed"
           >
-            {outOfStock ? 'Out of stock' : added ? 'Added!' : 'Add to cart'}
+            {outOfStock
+              ? 'Out of stock'
+              : atMax
+              ? 'Max in cart'
+              : added
+              ? 'Added!'
+              : 'Add to cart'}
           </button>
         </div>
       </div>
